@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Hubitos · 动态助手首页</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js" defer></script><script src="app.js" defer></script>
+</head>
+<body>
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.5 10 10 0 0 1-4-.8L3 21l1.8-4.9A8.5 8.5 0 1 1 21 11.5Z"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="14" rx="3"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M12 20V4m-7 7 7-7 7 7"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="16" cy="17" r="3"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Zm0 0v6h6M8 14h8M8 17h5"/></symbol>
+  </defs></svg>
+  <div class="preview-bar"><span id="previewLabel"></span><div><span id="previewNote"></span><button id="openConfig" class="plain"></button></div></div>
+  <main class="workspace">
+    <header class="home-header">
+      <div class="heading-row"><video class="brand" src="hero-logo.webm" muted autoplay loop playsinline aria-hidden="true" poster="logo.svg"></video><h1 id="roleTitle"></h1></div>
+      <div id="modeTabs" class="mode-tabs" role="tablist"></div>
+    </header>
+    <section class="compose-area" id="composeArea">
+      <div class="composer" id="composer">
+        <div class="editor">
+          <textarea id="prompt" spellcheck="false" aria-describedby="exampleText inputHelp"></textarea>
+          <div class="suggestion" id="suggestion"><span id="trySaying"></span><button id="exampleText" class="example-text" type="button"></button><button id="fillExample" class="tab-hint" type="button"><kbd>Tab</kbd></button></div>
+        </div>
+        <div id="attachments" class="attachments" hidden></div>
+        <div class="composer-toolbar">
+          <div class="toolbar-left"><button id="addFile" class="icon-button"><svg><use href="#i-plus"/></svg></button><button id="webButton" class="icon-button active" aria-pressed="true"><svg><use href="#i-globe"/></svg></button><button id="ratioButton" class="ratio-button" disabled><svg><use href="#i-settings"/></svg><span id="ratioLabel"></span></button></div>
+          <div class="toolbar-right"><button id="clearDraft" class="plain" hidden></button><div class="model-pill" id="modelPreview"><img class="model-mark" src="openai.svg" alt=""><span id="textModel"></span><i></i><img class="model-mark" src="openai.svg" alt=""><span id="imageModel"></span></div><button id="sendButton" class="send-button" disabled><svg><use href="#i-send"/></svg></button></div>
+        </div>
+      </div>
+      <p class="sr-only" id="inputHelp"></p>
+    </section>
+    <section class="receipt" id="receipt" hidden><div id="receiptUser" class="receipt-user"></div><div class="receipt-message"><h2 id="receiptTitle"></h2><p id="receiptBody"></p><p id="receiptNote"></p><button id="backToDraft" class="fill-button"></button></div></section>
+  </main>
+  <input id="fileInput" type="file" multiple hidden>
+  <dialog id="configDialog">
+    <header class="dialog-header"><div><h2 id="configTitle"></h2><p id="configDescription"></p></div><button id="closeConfig" class="icon-button"><svg><use href="#i-close"/></svg></button></header>
+    <div class="config-body"><section class="catalog"><h3 id="allExamples"></h3><div id="catalogList"></div></section><section class="config-editor"><label id="jsonLabel" for="configText"></label><p id="configHelp"></p><textarea id="configText" spellcheck="false"></textarea></section></div>
+    <p id="configStatus" role="status"></p>
+    <footer class="dialog-footer"><div><button id="resetConfig" class="secondary"></button><button id="importConfig" class="secondary"></button><button id="exportConfig" class="secondary"></button></div><button id="applyConfig" class="primary"></button></footer>
+  </dialog>
+  <input id="configFile" type="file" accept="application/json,.json" hidden>
+  <div id="toast" role="status"></div>
+</body>
+</html>

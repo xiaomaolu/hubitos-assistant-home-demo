@@ -1,0 +1,269 @@
+/* 唯一文案配置源。2026-11-03 更新：11 条日常工作示例。
+ * 移除视频处理引导；文档类改为上传分析。能力为演示预设。
+ */
+window.HUBITOS_HOME_CONFIG = {
+  "version": 4,
+  "locale": "zh-Hans",
+  "selection": {
+    "strategy": "random-on-entry",
+    "avoidImmediateRepeat": true
+  },
+  "capabilities": {
+    "chat": true,
+    "social": true,
+    "image": true,
+    "video": true,
+    "commerce": true,
+    "webSearch": true,
+    "attachments": true,
+    "imageEditing": true
+  },
+  "ui": {
+    "pageTitle": "Hubitos · 动态助手首页",
+    "previewLabel": "Hubitos 交互预览",
+    "configButton": "文案配置",
+    "previewNote": "本地交互演示",
+    "defaultTitle": "你的 AI 助手",
+    "emptyPlaceholder": "告诉我，你想完成什么？",
+    "trySaying": "尝试对我说",
+    "fill": "填入示例",
+    "tabHint": "按 Tab 填入",
+    "attachment": "添加参考素材",
+    "web": "联网搜索",
+    "imageSettings": "图片设置",
+    "attachTip": "演示中可选择本地素材，文件仅在当前页面预览。",
+    "removeAttachment": "移除素材",
+    "clear": "清空内容",
+    "send": "发送",
+    "inputLabel": "给 Hubitos 发送消息",
+    "enterHint": "Enter 发送，Shift + Enter 换行",
+    "reviewHint": "填入后可继续编辑，由你确认发送。",
+    "user": "你",
+    "receiptTitle": "已模拟提交",
+    "receiptBody": "这份 demo 只展示交互，不会调用模型、扣积分或发布内容。",
+    "receiptNote": "实际产品将按任务补充信息，并在需要时展示方案、积分或发布确认卡。",
+    "back": "返回编辑",
+    "noExamples": "当前没有可用示例，可以直接输入你的需求。",
+    "draftProtection": "清空当前草稿后可切换示例。",
+    "configTitle": "文案与交互配置",
+    "configDescription": "日常工作每次进入展示一组，停留期间保持不变。能力为演示预设。",
+    "allExamples": "全部场景",
+    "configuration": "配置 JSON",
+    "export": "导出配置",
+    "import": "导入配置",
+    "apply": "应用配置",
+    "reset": "恢复默认",
+    "close": "关闭配置",
+    "configApplied": "配置已应用。",
+    "invalidConfig": "配置无效，请检查字段格式、唯一 ID、模式和能力名称。",
+    "exportFilename": "hubitos-home-config.json",
+    "configHelp": "编辑 role、leadIn、prompt、prerequisite、enabled、requires 和 selection。仅保留适合新对话的示例；文档类引导上传后分析，不承诺文件导出。电商图片使用静态入口。{{publishDate}} 显示为月日，跨年时带年份；填入时总是包含完整年份。",
+    "countLabel": "个场景",
+    "sourceLabel": "能力依据",
+    "fileLabel": "已选素材",
+    "removeTitle": "删除所选素材",
+    "modeLabel": "助手模式",
+    "scenarioLabel": "选择示例场景",
+    "disabledLabel": "条件未满足或已关闭",
+    "modelLabel": "预览模型",
+    "demoTextModel": "GPT-5.4 Mini",
+    "demoImageModel": "GPT Image 2",
+    "demoRatio": "1:1",
+    "uploadRejected": "文件格式或大小不符合当前上传设置，或已达到数量上限。"
+  },
+  "modes": [
+    {
+      "id": "daily",
+      "label": "日常工作",
+      "icon": "chat",
+      "dynamicExamples": true,
+      "staticTitle": "AI 助手",
+      "placeholder": "告诉我，你想完成什么？"
+    },
+    {
+      "id": "commerce",
+      "label": "电商图片",
+      "icon": "bag",
+      "dynamicExamples": false,
+      "staticTitle": "电商图片",
+      "placeholder": "上传商品图片，告诉我你想生成什么。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "social-schedule",
+      "mode": "daily",
+      "enabled": true,
+      "role": "想提前排好帖子？",
+      "shortLabel": "社媒发帖",
+      "requires": [
+        "social"
+      ],
+      "prompt": "帮我写圣诞帖，{{publishDate}}20点发到Facebook主页",
+      "prerequisite": "需连接可发布的 Facebook 主页，并核对完整日期、时区和目标账号。",
+      "source": "social_list_accounts / social_publish / social_get_post_status"
+    },
+    {
+      "id": "product-video",
+      "mode": "daily",
+      "enabled": true,
+      "role": "想给商品做视频？",
+      "shortLabel": "宣传视频",
+      "requires": [
+        "video",
+        "attachments"
+      ],
+      "prompt": "帮我用上传的白色袜子商品图，生成15秒竖屏宣传视频",
+      "prerequisite": "上传真实商品图，检查 15 秒方案与积分，确认后生成。",
+      "source": "video_plan / video_generate / video_get"
+    },
+    {
+      "id": "creative-image",
+      "mode": "daily",
+      "enabled": true,
+      "role": "需要一张活动图？",
+      "shortLabel": "创意生图",
+      "requires": [
+        "image"
+      ],
+      "prompt": "帮我生成一张黑五促销社媒配图，使用暖色调且不加文字",
+      "prerequisite": "先查看图片方案与积分，确认后生成。",
+      "source": "image_plan / image_generate"
+    },
+    {
+      "id": "image-edit",
+      "mode": "daily",
+      "enabled": true,
+      "role": "照片背景要换吗？",
+      "shortLabel": "图片修改",
+      "requires": [
+        "image",
+        "imageEditing",
+        "attachments"
+      ],
+      "prompt": "帮我把上传照片的背景换成浅灰色，保留主体并自然补光",
+      "prerequisite": "需要目标图片、兼容图片输入的文字模型，以及明确支持参考图的图片模型。",
+      "source": "general image plan: edit / image_generate"
+    },
+    {
+      "id": "social-image-post",
+      "mode": "daily",
+      "enabled": true,
+      "role": "想发一条带图帖？",
+      "shortLabel": "配图发帖",
+      "requires": [
+        "social",
+        "image"
+      ],
+      "prompt": "帮我写咖啡店周末活动的Facebook帖子，配图后确认发布",
+      "prerequisite": "先确认配图生成，再确认发布，需连接 Facebook 主页。",
+      "source": "image_plan / image_generate + social_publish"
+    },
+    {
+      "id": "writing",
+      "mode": "daily",
+      "enabled": true,
+      "role": "有封邮件要写吗？",
+      "shortLabel": "日常写作",
+      "requires": [
+        "chat"
+      ],
+      "prompt": "帮我写封英文邮件询问客户试用反馈，语气友好并附中文",
+      "prerequisite": "可以补充产品信息、客户反馈和期望语气。",
+      "source": "text conversation"
+    },
+    {
+      "id": "reading",
+      "mode": "daily",
+      "enabled": true,
+      "role": "有份PDF要快读？",
+      "shortLabel": "PDF 总结",
+      "requires": [
+        "chat",
+        "attachments"
+      ],
+      "prompt": "帮我总结上传PDF的关键结论，列出要点和需要核实的信息",
+      "prerequisite": "上传可读取的 PDF，并选择兼容附件的模型；扫描件或复杂版式可能需要补充内容。",
+      "source": "conversation attachments / document text extraction / attachment_read",
+      "leadIn": "试试上传一份 PDF："
+    },
+    {
+      "id": "research",
+      "mode": "daily",
+      "enabled": true,
+      "role": "想先做市场调研？",
+      "shortLabel": "联网调研",
+      "requires": [
+        "webSearch"
+      ],
+      "prompt": "帮我联网查今年海外黑五已公开的品类及促销玩法，附来源",
+      "prerequisite": "需联网工具可用，并区分已公开促销、往年经验与本年度结果。",
+      "source": "web_search / web_fetch"
+    },
+    {
+      "id": "word-document",
+      "mode": "daily",
+      "enabled": true,
+      "role": "有份方案要梳理？",
+      "shortLabel": "Word 分析",
+      "requires": [
+        "chat",
+        "attachments"
+      ],
+      "prompt": "帮我分析上传的Word方案，提炼目标、排期和待补充事项",
+      "prerequisite": "上传可读取的 Word 文档，提取正文后在对话中分析；不承诺生成下载文件。",
+      "source": "conversation attachments / document text extraction / attachment_read",
+      "leadIn": "试试上传一份 Word 文档："
+    },
+    {
+      "id": "presentation",
+      "mode": "daily",
+      "enabled": true,
+      "role": "演示内容够清楚吗？",
+      "shortLabel": "PPT 分析",
+      "requires": [
+        "chat",
+        "attachments"
+      ],
+      "prompt": "帮我分析上传的PPT，梳理核心观点并给出逐页优化建议",
+      "prerequisite": "上传可读取的 PPT；按可提取的页面内容提出建议，不承诺还原图表或直接修改文件。",
+      "source": "conversation attachments / document text extraction / attachment_read",
+      "leadIn": "试试上传一份 PPT："
+    },
+    {
+      "id": "spreadsheet",
+      "mode": "daily",
+      "enabled": true,
+      "role": "销售数据怎么看？",
+      "shortLabel": "Excel 分析",
+      "requires": [
+        "chat",
+        "attachments"
+      ],
+      "prompt": "帮我分析上传的Excel销售表，汇总分类数据并说明变化",
+      "prerequisite": "上传包含分类及日期字段的可读取销售表；数据不完整时先补充，不承诺生成图表或下载文件。",
+      "source": "conversation attachments / document text extraction / attachment_read",
+      "leadIn": "试试上传一份 Excel 表格："
+    }
+  ],
+  "uploads": {
+    "accept": [
+      ".png",
+      ".jpg",
+      ".jpeg",
+      ".webp",
+      ".gif",
+      ".pdf",
+      ".md",
+      ".markdown",
+      ".doc",
+      ".docx",
+      ".xls",
+      ".xlsx",
+      ".ppt",
+      ".pptx"
+    ],
+    "maxFiles": 4,
+    "maxFileBytes": 20971520
+  }
+};
